@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {House, CornerRightUp, AlignJustify} from 'lucide-react';
+//import { House, CornerRightUp, AlignJustify, ArrowLeft, ShoppingCart } from 'lucide-react';
 
 const { width } = Dimensions.get('window');
 
@@ -65,13 +65,13 @@ const renderItem = ({ item }) => (
   return (
     <View style={styles.container}>
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.headerButton}>
-          <Icon name="arrow-back" size={24} color="#fff" />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.headerButton}>
+        <Icon name="arrow-back" size={24} color="#fff" />
+      </TouchableOpacity>
       <Text style={styles.headerTitle}>Chat</Text>
-        <TouchableOpacity style={styles.headerButton}>
-          <Icon name="shopping-cart" size={24} color="#fff" />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.headerButton}>
+        <Icon name="shopping-cart" size={24} color="#fff" />
+      </TouchableOpacity>
     </View>
     <FlatList
       data={products}
@@ -79,15 +79,16 @@ const renderItem = ({ item }) => (
       keyExtractor={(item) => item.id.toString()}
     />
     <View style={styles.footer}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.footerButton}>
-          <AlignJustify size={24}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={{justifyContent:'center'}}>
-          <House size={24}/>
+        <TouchableOpacity style={styles.footerButton}>
+          <Icon name="menu" size={24}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <CornerRightUp size={24}/>
+          <Icon name="home" size={24}/>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.footerButton}>
+          <Icon name="navigate-next" size={24}/>
+        </TouchableOpacity>
+
       </View>
     </View>
   );
