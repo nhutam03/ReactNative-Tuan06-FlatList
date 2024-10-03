@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 //import { House, CornerRightUp, AlignJustify, ArrowLeft, ShoppingCart } from 'lucide-react';
 
 const { width } = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const products =[{
+  const navigation = useNavigation();
+  const products = [{
     id: 1,
     name: 'Ca nấu lẩu, nấu mì mini 16cm',
     store: 'Devang',
@@ -49,7 +51,7 @@ const HomeScreen = () => {
     image: require('./img/thien_tai.jpg'),
   },
   ];
-const renderItem = ({ item }) => (
+  const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={item.image} style={styles.image} />
       <View style={styles.textContainer}>
@@ -64,29 +66,35 @@ const renderItem = ({ item }) => (
 
   return (
     <View style={styles.container}>
-    <View style={styles.header}>
-      <TouchableOpacity style={styles.headerButton}>
-        <Icon name="arrow-back" size={24} color="#fff" />
-      </TouchableOpacity>
-      <Text style={styles.headerTitle}>Chat</Text>
-      <TouchableOpacity style={styles.headerButton}>
-        <Icon name="shopping-cart" size={24} color="#fff" />
-      </TouchableOpacity>
-    </View>
-    <FlatList
-      data={products}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-    />
-    <View style={styles.footer}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.headerButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name="arrow-back" size={24} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Chat</Text>
+        <TouchableOpacity style={styles.headerButton}>
+          <Icon name="shopping-cart" size={24} color="#fff" />
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        showsHorizontalScrollIndicator={false}
+      />
+      <View style={styles.footer}>
         <TouchableOpacity style={styles.footerButton}>
-          <Icon name="menu" size={24}/>
+          <Icon name="menu" size={24} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.footerButton}>
-          <Icon name="home" size={24}/>
+          <Icon name="home" size={24} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton}>
-          <Icon name="navigate-next" size={24}/>
+        <TouchableOpacity
+          style={styles.footerButton}
+          onPress={() => navigation.navigate('DetailsScreen')}
+        >
+          <Icon name="navigate-next" size={24} />
         </TouchableOpacity>
 
       </View>
